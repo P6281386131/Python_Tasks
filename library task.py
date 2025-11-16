@@ -74,3 +74,36 @@ print(library.keys())
 
 print("\n--- Dictionary Values ---")
 print(library.values())
+
+print("\n--- User Search Option ---")
+search_field = input("Search by (title/author/year): ").lower()
+search_value = input("Enter value to search: ")
+
+found_search = "No matching book found"
+
+for book_id, info in library.items():
+    if str(info.get(search_field)).lower() == search_value.lower():
+        found_search = {book_id: info}
+        break
+
+print("\nSearch Result:", found_search)
+
+print("\n--- User Update Option ---")
+update_id = input("Enter Book ID to update: ")
+
+if update_id in library:
+    print("Current Book Data:", library[update_id])
+    field = input("What do you want to update? (title/author/year): ").lower()
+    new_val = input("Enter new value: ")
+
+    if field == "year":
+        new_val = int(new_val)
+
+    library[update_id][field] = new_val
+
+    print("\nBook Updated Successfully!")
+    print(update_id, ":", library[update_id])
+else:
+    print("\nBook ID not found!")
+
+
